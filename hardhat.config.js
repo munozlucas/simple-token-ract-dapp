@@ -1,10 +1,12 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config({path:__dirname+'/.env'})
+
+
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
-
   for (const account of accounts) {
     console.log(account.address);
   }
@@ -24,6 +26,10 @@ module.exports = {
   networks: {
     hardhat: {
       chainId: 1337
+    },
+    ropsten: {
+      url: "https://ropsten.infura.io/v3/76241408ebde412a94282394bba13307",
+      accounts: [`0x${process.env.PRIVATE_KEY}`]
     }
   }
 };
